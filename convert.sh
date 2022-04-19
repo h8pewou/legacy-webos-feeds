@@ -47,7 +47,7 @@ for id in `jq '.[].id' archivedAppData.json`; do
         echo "Maintainer: $author"
         echo "Size: $appSize_appjson"
         echo "Filename: $filename_appjson"
-        echo 'Source: {"Title":"'$title'","Location":"http://weboslives.eu/AppPackages/'$filename_appjson'","Source":"http://weboslives.eu/AppPackages/'$filename_appjson'","Type":"Application","Feed":"WOSA","LastUpdated":"'$modified_date'","Category":"'$category'","Homepage":"'$homeURL_appjson'","Icon":"http://appimages.webosarchive.com/'$appIcon'","FullDescription":"'$description_appjson'","Screenshots":['$screenshot_appjson'],"Countries":["'$locale_appjson'"],"Languages":["'$locale_appjson'"],"License":"'$licenseURL_appjson'","DeviceCompatibility":['$devices']}'
+        echo 'Source: {"Title":"'$title'","Location":"http://museum.weboslives.eu/AppPackages/'$filename_appjson'","Source":"http://museum.weboslives.eu/AppPackages/'$filename_appjson'","Type":"Application","Feed":"WOSA","LastUpdated":"'$modified_date'","Category":"'$category'","Homepage":"'$homeURL_appjson'","Icon":"http://appimages.webosarchive.com/'$appIcon'","FullDescription":"'$description_appjson'","Screenshots":['$screenshot_appjson'],"Countries":["'$locale_appjson'"],"Languages":["'$locale_appjson'"],"License":"'$licenseURL_appjson'","DeviceCompatibility":['$devices']}'
         echo "Description: $title"
         echo ""
 done
