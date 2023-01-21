@@ -21,6 +21,17 @@ Detailed steps to add it:
 
 The new feed is an almost exact replica of the original feed. None of the IPKs are modified, only the Packages + Packages.gz were updated with the new HTTP URLs.
 
+### WOSA Feed
+The App Museum II is also available as a Preware feed, so you can enjoy it on older devices as well.
+
+How to add this feed?
+
+1. Launch Preware
+2. Tap Manage Feeds
+3. Scroll down to New Feed, enter a unique name (e.g., wosa) and the following URL: http://weboslives.eu/feeds/wosa
+4. Read the warning message and if you are fine with the risks hit Ok
+5. Go back and let Preware to update the Feeds
+
 ### palm-catalog feed
 A resurrected palm-catalog feed for Preware. Similarly to the other feed, all the files are hosted on HTTP, so it works on any legacy webOS device. No ssl proxy required.
 
@@ -42,17 +53,6 @@ Detailed steps to add it:
 
 The new feed is an almost exact replica of the original feed. IPKs are the same as in the WebOS App Museum II, Packages + Packages.gz were updated with the new HTTP URLs.
 
-### WOSA Feed
-The App Museum II is also available as a Preware feed, so you can enjoy it on older devices as well.
-
-How to add this feed?
-
-1. Launch Preware
-2. Tap Manage Feeds
-3. Scroll down to New Feed, enter a unique name (e.g., wosa) and the following URL: http://weboslives.eu/feeds/wosa
-4. Read the warning message and if you are fine with the risks hit Ok
-5. Go back and let Preware to update the Feeds
-
 
 ## Bash script to create a webOS App Museum feed for Preware
 
@@ -61,15 +61,17 @@ This script converts the webOS App Museum JSONs to a Preware feed.
 > This should work fine on macOS. In order to make it work on Linux, you may need to update the following line:
 >
 > ```modified_date=`date -j -f "%Y-%m-%dT%H:%M:%S" "'lastModifiedTime_appjson'" +%s 2>/dev/null` ```
+>to:
+>	```modified_date=`date -d "'lastModifiedTime_appjson'" +%s 2>/dev/null` ```
 
 All in all, this is a horrible script, the whole thing will need to be rewritten.
 ### Pre-requisites
 
  - Install jq, sed, awk, git, wget and grep
  - Obtain the necesary files
-   - ```wget https://raw.githubusercontent.com/codepoet80/webos-catalog-backend/main/archivedAppData.json```
-   - ```git clone https://github.com/codepoet80/webos-catalog-metadata.git```
- - Ensure that the webOS Catalog Metadata files are in the following directory: webos-catalog-metadata-main
+   - ```wget https://raw.githubusercontent.com/webOSArchive/webos-catalog-backend/main/archivedAppData.json```
+   - ```git clone https://github.com/webOSArchive/webos-catalog-metadata.git```
+ - Ensure that the webOS Catalog Metadata files are in the following directory: webos-catalog-metadata
  - Ensure that the archivedAppData.json is in the same directory as this script
 
 ### Usage:
