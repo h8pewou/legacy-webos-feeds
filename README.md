@@ -13,11 +13,11 @@ Detailed steps to add it:
 2. Tap Manage Feeds
 3. Unselect precentral (move the slider to off)
 4. Go back
-5. Let Preware to update the Feeds
+5. Let it update the Feeds
 6. Tap Manage Feeds again
 7. Scroll down to New Feed, enter a unique name (e.g., precentral-fixed) and the following URL: http://weboslives.eu/feeds/precentral
-8. Read the warning message and if you are fine with the risks hit Ok
-9. Go back and let Preware to update the Feeds
+8. Read the warning message and if you are fine with the risks hit OK
+9. Go back and let Preware update the Feeds again
 
 The new feed is an almost exact replica of the original feed. None of the IPKs are modified, only the Packages + Packages.gz were updated with the new HTTP URLs.
 
@@ -30,7 +30,7 @@ How to add this feed?
 2. Tap Manage Feeds
 3. Scroll down to New Feed, enter a unique name (e.g., wosa) and the following URL: http://weboslives.eu/feeds/wosa
 4. Read the warning message and if you are fine with the risks hit Ok
-5. Go back and let Preware to update the Feeds
+5. Go back and let Preware update the Feeds
 
 ### palm-catalog feed
 A resurrected palm-catalog feed for Preware. Similarly to the other feed, all the files are hosted on HTTP, so it works on any legacy webOS device. No ssl proxy required.
@@ -49,7 +49,7 @@ Detailed steps to add it:
 2. Tap Manage Feeds
 3. Scroll down to New Feed, enter a unique name (e.g., palm-catalog) and the following URL: http://weboslives.eu/feeds/palm-catalog
 4. Read the warning message and if you are fine with the risks hit Ok
-5. Go back and let Preware to update the Feeds
+5. Go back and let Preware update the Feeds
 
 The new feed is an almost exact replica of the original feed. IPKs are the same as in the WebOS App Museum II, Packages + Packages.gz were updated with the new HTTP URLs.
 
