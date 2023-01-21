@@ -38,7 +38,7 @@ for id in `jq '.[].id' archivedAppData.json`; do
 	modified_date=`date -j -f "%Y-%m-%dT%H:%M:%S" $lastModifiedTime_appjson +%s 2>/dev/null`
         appIcon=`jq '.[] | select(.id=='$id') | .appIcon' archivedAppData.json | sed 's/\"//g' | tail -1`
         description_appjson=`jq .description webos-catalog-metadata/$id.json | sed 's/\"//g' |  sed 's/\\.//g' | head -1`
-        screenshot_appjson=`jq .[] webos-catalog-metadata/$id.json | jq .[].screenshot 2>/dev/null | grep -v ^null | sed 's/^\"/\"http\:\/\/appimages.webosarchive.org\//g' | tr '\n' ',' | sed 's/,$//g'`
+        screenshot_appjson=`jq .[] webos-catalog-metadata/$id.json | jq .[].screenshot 2>/dev/null | grep -v ^null | sed 's/^\"/\"http\:\/\/museum.weboslives.eu\/AppImages\//g' | tr '\n' ',' | sed 's/,$//g'`
         locale_appjson=`jq .locale webos-catalog-metadata/$id.json | sed 's/\"//g'`
         licenseURL_appjson=`jq .licenseURL webos-catalog-metadata/$id.json | sed 's/\"//g'`
         devices=`jq '.[] | select(.id=='$id') | "\(.Pixi) \(.Pre) \(.Pre2) \(.Pre3) \(.Veer) \(.TouchPad)"' archivedAppData.json | sed 's/\"//g' | awk 'BEGIN {FS=IFS=OFS=" "} {if ($1=="true") {$1="\"Pixi\""} ; if ($2=="true") {$2="\"Pre\""} ;  if ($3=="true") {$3="\"Pre2\""} ; if ($4=="true") {$4="\"Pre3\""} ; if ($5=="true") {$5="\"Veer\""} ; if ($6=="true") {$6="\"TouchPad\""} ; print $0}' | sed 's/false\ //g' | sed 's/\ /,/g' | sed 's/,$//g'`
@@ -49,7 +49,7 @@ for id in `jq '.[].id' archivedAppData.json`; do
         echo "Maintainer: $author"
         echo "Size: $appSize_appjson"
         echo "Filename: $filename_appjson"
-        echo 'Source: {"Title":"'$title'","Location":"http://museum.weboslives.eu/AppPackages/'$filename_appjson'","Source":"http://museum.weboslives.eu/AppPackages/'$filename_appjson'","Type":"Application","Feed":"WOSA","LastUpdated":"'$modified_date'","Category":"'$category'","Homepage":"'$homeURL_appjson'","Icon":"http://appimages.webosarchive.org/'$appIcon'","FullDescription":"'$description_appjson'","Screenshots":['$screenshot_appjson'],"Countries":["'$locale_appjson'"],"Languages":["'$locale_appjson'"],"License":"'$licenseURL_appjson'","DeviceCompatibility":['$devices']}'
+        echo 'Source: {"Title":"'$title'","Location":"http://museum.weboslives.eu/AppPackages/'$filename_appjson'","Source":"http://museum.weboslives.eu/AppPackages/'$filename_appjson'","Type":"Application","Feed":"WOSA","LastUpdated":"'$modified_date'","Category":"'$category'","Homepage":"'$homeURL_appjson'","Icon":"http://museum.weboslives.eu/AppImages/'$appIcon'","FullDescription":"'$description_appjson'","Screenshots":['$screenshot_appjson'],"Countries":["'$locale_appjson'"],"Languages":["'$locale_appjson'"],"License":"'$licenseURL_appjson'","DeviceCompatibility":['$devices']}'
         echo "Description: $title"
         echo ""
 done
