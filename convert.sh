@@ -5,7 +5,7 @@
 # This should work fine on macOS. In order to make it work on Linux, you may need to update the following line.
 #       modified_date=`date -j -f "%Y-%m-%dT%H:%M:%S" "'lastModifiedTime_appjson'" +%s 2>/dev/null`
 #    to:
-#	modified_date=`date -d "'lastModifiedTime_appjson'" +%s 2>/dev/null`
+#	modified_date=`date -d $lastModifiedTime_appjson +%s 2>/dev/null`
 #
 #
 # All in all, this is a horrible script, the whole thing will need to be rewritten.
