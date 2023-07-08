@@ -69,8 +69,8 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         param (
           [string]$InputString
         )
-        # Use regular expression to replace any non-alphanumeric character except . , - with an empty string
-        $OutputString = $InputString -replace '[^\w .,-]', ''
+        # Use regular expression to remove special characters
+        $OutputString = $InputString -replace "'", "``" -replace '[^\w .,:/;`-]', ' '
         # Return the output string
         return $OutputString
     }
@@ -82,7 +82,7 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         Title = $_.title
         Location = $source_location
         Source = $source_location
-        Type = "Application"
+        Type = "Application"    
         Feed = "WOSA"
         LastUpdated = $lastupdated
         Category = $_.category
@@ -90,8 +90,8 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         Icon = $iconurl
         FullDescription = $description
         Screenshots = $screenshots
-        Countries = $app_metadata.locale
-        Languages = $app_metadata.locale
+        Countries = @($app_metadata.locale)
+        Languages = @($app_metadata.locale)
         License = $app_metadata.licenseURL
         DeviceCompatibility = $devicecompatibility
     }
@@ -104,5 +104,15 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
 
 # Write the Preware feed to the Packages file
 $preware_feed | Out-File Packages
+
+# Check if gzip exists as an executable
+$gzip = Get-Command -Name gzip -ErrorAction SilentlyContinue
+
+# If gzip exists, launch it
+if ($gzip) {
+    gzip -kf Packages
+} else {
+    Write-Warning "gzip not found, you may need to run gzip -k Packages manually"
+}
 
 Write-Host "`nCompleted."
