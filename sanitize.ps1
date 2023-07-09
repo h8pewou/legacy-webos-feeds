@@ -40,7 +40,11 @@ $preware_feed = ($Packages | foreach-Object -ThrottleLimit 8 -Parallel {
             # Remove special characters from the description
             $source.FullDescription = Remove-SpecialChars -InputString $source.FullDescription
             # Check if the file is available, update the title if not
-            $urlbroken = Test-BrokenUrl $source.Location
+            if($source.Location -like "*//*") {
+                $urlbroken = Test-BrokenUrl $source.Location
+            } Else {
+                $urlbroken = $true
+            }
             if ($urlbroken) { $source.Title = $source.Title + " - Missing IPK"}
             $newjson = ($source | ConvertTo-Json -Compress)
             Write-Output "Source: $newjson"
@@ -71,4 +75,13 @@ if ($gzip) {
     gzip -kf Packages
 } else {
     Write-Warning "gzip not found, you may need to run gzip -k Packages manually"
+}
+
+Write-Host "Missing IPKs:"
+$missing = ($preware_feed | Select-String "Missing IPK")
+foreach($line in $missing){
+    $json = $line -replace ".*Source: "
+    $json = $json.Trim()
+    $source = ($json | convertfrom-json)
+    Write-Host $source.Title + $source.Location
 }

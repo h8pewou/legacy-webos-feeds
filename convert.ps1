@@ -52,7 +52,15 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         Write-Error $error_message
     }
     # Construct the source location URL
-    $source_location = ($museum_app_url + $app_metadata.filename)
+    if ($app_metadata.filename -like "*//*") {
+        if($app_metadata.filename -like "*.ipk"){
+            $source_location = $app_metadata.filename
+        } Else {
+            $source_location = "NO_IPK"
+        }
+    } Else {
+        $source_location = ($museum_app_url + $app_metadata.filename)
+    }
     # Construct the icon URL
     $iconurl = ($museum_img_url + $_.appIcon)
     # Construct screenshot URLs
@@ -99,7 +107,7 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
     # Output all information obtained above
     Write-Output ("Package: " + $archivedAppData_id + "`nVersion: " + $app_metadata.Version + "`nSection: " + $_.Category + "`nArchitecture: all" + "`nMaintainer: " + $_.Author + "`nSize: " + $app_metadata.appSize + "`nFilename: " + $app_metadata.originalFileName + "`nSource: " + $Source + "`nDescription: " + $_.title + "`n")
     # Display progress on screen
-    Write-Progress -Activity "  Processing" -Status "$archivedAppData_id "
+    Write-Progress -Activity "  Processing" -Status $_.title
 })
 
 # Write the Preware feed to the Packages file
@@ -114,5 +122,3 @@ if ($gzip) {
 } else {
     Write-Warning "gzip not found, you may need to run gzip -k Packages manually"
 }
-
-Write-Host "`nCompleted."
