@@ -90,20 +90,24 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         Title = $_.title
         Location = $source_location
         Source = $source_location
-        Type = "Application"    
+        Type = "Application"
         Feed = "WOSA"
         LastUpdated = $lastupdated
         Category = $_.category
         Homepage = $app_metadata.homeURL
-        Icon = $iconurl
+        Icon = $iconurl.Replace("/","\/")
         FullDescription = $description
-        Screenshots = $screenshots
+        Screenshots = $screenshots.Replace("/","\/")
         Countries = @($app_metadata.locale)
         Languages = @($app_metadata.locale)
         License = $app_metadata.licenseURL
         DeviceCompatibility = $devicecompatibility
     }
     $Source = ($Source_Table | ConvertTo-Json -Compress)
+
+    # Replace double backslashes with single backslashes
+    $Source = $Source -replace '\\\\', '\\'
+
     # Output all information obtained above
     Write-Output ("Package: " + $archivedAppData_id + "`nVersion: " + $app_metadata.Version + "`nSection: " + $_.Category + "`nArchitecture: all" + "`nMaintainer: " + $_.Author + "`nSize: " + $app_metadata.appSize + "`nFilename: " + $app_metadata.originalFileName + "`nSource: " + $Source + "`nDescription: " + $_.title + "`n")
     # Display progress on screen
