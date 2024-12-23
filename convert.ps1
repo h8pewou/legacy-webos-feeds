@@ -85,6 +85,16 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
     # Remove special characters from the description
     $description = Remove-SpecialChars -InputString $app_metadata.description
 
+    # Ensure Screenshots is always an array
+    if ($screenshots -is [string]) {
+        $ScreenshotsArray = @($screenshots.Replace("/","\/"))
+    } elseif ($screenshots -is [array]) {
+        $ScreenshotsArray = $screenshots | ForEach-Object { $_.Replace("/","\/") }
+    } else {
+        # If it's not a string or array, convert it to an array with one element
+        $ScreenshotsArray = @($screenshots.ToString().Replace("/","\/"))
+    }
+
     # Construct the source table
     $Source_Table = @{
         Title = $_.title
@@ -97,7 +107,7 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         Homepage = $app_metadata.homeURL
         Icon = $iconurl.Replace("/","\/")
         FullDescription = $description
-        Screenshots = $screenshots.Replace("/","\/")
+        Screenshots = $ScreenshotsArray
         Countries = @($app_metadata.locale)
         Languages = @($app_metadata.locale)
         License = $app_metadata.licenseURL
