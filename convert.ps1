@@ -11,7 +11,7 @@ catch {
 }
 
 Write-Host "Generating Preware feed: "
-$preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
+$preware_feed = ($archivedAppData | ForEach-Object {
     # Define the WOSA archive URLs and device variables
     $catalog_metadata_url = "http://weboslives.eu/feeds/wosa/webos-catalog-metadata"
     $museum_app_url = "http://museum.weboslives.eu/AppPackages/"
@@ -31,7 +31,7 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         Write-Error $error_message
         continue
     }
-    
+
     # Use try-catch block to handle last modified date errors
     try {
         # Get the last modified time from the app metadata
@@ -113,10 +113,9 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
         License = $app_metadata.licenseURL
         DeviceCompatibility = $devicecompatibility
     }
-    $Source = ($Source_Table | ConvertTo-Json -Compress)
-
+    $SourceJson = ($Source_Table | ConvertTo-Json -Compress)
     # Replace double backslashes with single backslashes
-    $Source = $Source -replace '\\\\', '\\'
+    $Source = $SourceJson -replace '\\', '\'
 
     # Output all information obtained above
     Write-Output ("Package: " + $archivedAppData_id + "`nVersion: " + $app_metadata.Version + "`nSection: " + $_.Category + "`nArchitecture: all" + "`nMaintainer: " + $_.Author + "`nSize: " + $app_metadata.appSize + "`nFilename: " + $app_metadata.originalFileName + "`nSource: " + $Source + "`nDescription: " + $_.title + "`n")
@@ -124,8 +123,14 @@ $preware_feed = ($archivedAppData | ForEach-Object -ThrottleLimit 8 -Parallel {
     Write-Progress -Activity "  Processing" -Status $_.title
 })
 
+
+$preware_feed = $preware_feed -replace '\\\\', '\\'
+
 # Write the Preware feed to the Packages file
 $preware_feed | Out-File Packages
+
+# Failsafe, in case if the Source replace didn't work
+/usr/bin/sed -i 's/\\\\/\\/g' Packages
 
 # Check if gzip exists as an executable
 $gzip = Get-Command -Name gzip -ErrorAction SilentlyContinue
