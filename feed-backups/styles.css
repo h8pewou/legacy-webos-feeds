@@ -1,0 +1,557 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+#container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Header styles */
+header {
+/*    background-color: #e0e0e0;*/
+    color: #333;
+    padding: 15px;
+    margin-bottom: 20px;
+/*    border-radius: 5px;
+    border: 1px solid #ddd;*/
+}
+
+header h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#controls {
+    display: block;
+    overflow: hidden;
+}
+
+.control-group {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.control-group label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.control-group select,
+.control-group input {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    font-size: 12px;
+    width: 120px;
+    background-color: white;
+}
+
+.control-group select:focus,
+.control-group input:focus {
+    border-color: #999;
+    outline: none;
+}
+
+.control-group input {
+    width: 150px;
+}
+
+/* Loading indicator */
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #666;
+}
+
+/* App grid */
+.app-grid {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.app-card {
+    float: left;
+    width: 290px;
+    height: 280px;
+    margin: 0 5px 20px 5px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-card:nth-child(3n) {
+    margin-right: 0;
+}
+
+.app-card:hover {
+    background-color: #f9f9f9;
+    border-color: #bbb;
+}
+
+.app-header {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.app-icon {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ddd;
+}
+
+.app-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.app-version {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.app-category {
+    font-size: 11px;
+    color: #666;
+    background-color: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 2px;
+    display: inline-block;
+    border: 1px solid #ddd;
+}
+
+.app-description {
+    font-size: 12px;
+    color: #555;
+    margin: 10px 0;
+    line-height: 1.3;
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+.app-meta {
+    font-size: 11px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.app-meta span {
+    margin-right: 10px;
+}
+
+.app-devices {
+    font-size: 10px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.device-tag {
+    background-color: #666;
+    color: white;
+    padding: 1px 4px;
+    border-radius: 2px;
+    margin-right: 3px;
+    font-size: 9px;
+}
+
+.app-actions {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    left: 15px;
+    text-align: right;
+}
+
+.download-btn {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.download-btn:hover {
+    background-color: #555;
+}
+
+/* Pagination */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+    clear: both;
+}
+
+.pagination button {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #555;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+}
+
+#page-info {
+    margin: 0 15px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.modal-app-icon {
+    float: left;
+    width: 64px;
+    height: 64px;
+    margin-right: 15px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ddd;
+}
+
+.modal-app-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.modal-app-version {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.modal-app-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 15px 0;
+    clear: both;
+}
+
+.modal-screenshots {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.modal-screenshots img {
+    max-width: 200px;
+    max-height: 150px;
+    width: auto;
+    height: auto;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.modal-screenshots img:hover {
+    transform: scale(1.05);
+}
+
+/* Screenshot modal for full-size images */
+.screenshot-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.screenshot-modal-content {
+    position: absolute;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    height: 80%;
+    top: 10%;
+    left: 5%;
+    text-align: center;
+}
+
+.screenshot-modal img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+.screenshot-modal .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.screenshot-modal .close:hover {
+    color: #bbb;
+}
+
+.modal-meta {
+    font-size: 12px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.modal-meta div {
+    margin: 5px 0;
+}
+
+/* Responsive design for different screen sizes */
+@media screen and (max-width: 1024px) {
+    .app-card {
+        width: 232px;
+        height: 280px;
+        margin: 0 8px 20px 8px;
+    }
+    
+    .app-card:nth-child(3n) {
+        margin-right: 0;
+    }
+    
+    #container {
+        max-width: 744px;
+    }
+}
+
+/* Specific fix for 1024x768 webOS browsers */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .app-card {
+        width: 240px;
+        height: 280px;
+        margin-right: 8px;
+    }
+    
+    .app-card:nth-child(3n) {
+        margin-right: 0;
+    }
+    
+    #container {
+        max-width: 760px;
+        padding: 8px;
+    }
+}
+
+/* TouchPad portrait mode (768x1024) */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .screenshot-modal-content {
+        width: 95%;
+        height: 75%;
+        top: 12.5%;
+        left: 2.5%;
+    }
+}
+
+/* General webOS device adjustments for browser UI */
+@media screen and (max-height: 1024px) {
+    .screenshot-modal-content {
+        height: 75%;
+        top: 12.5%;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .screenshot-modal-content {
+        height: 80%;
+        top: 10%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app-card {
+        width: 100%;
+        height: 200px;
+        margin-right: 0;
+    }
+    
+    .app-card:nth-child(3n) {
+        margin-right: 0;
+    }
+    
+    .control-group {
+        float: none;
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    .control-group select,
+    .control-group input {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #container {
+        padding: 5px;
+    }
+    
+    header {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 20px;
+    }
+    
+    .app-card {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+        padding: 15px;
+    }
+    
+    .screenshot-modal-content {
+        width: 95%;
+        height: 85%;
+        top: 7.5%;
+        left: 2.5%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .app-card {
+        padding: 8px;
+        height: 180px;
+    }
+    
+    .app-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .app-title {
+        font-size: 14px;
+    }
+    
+    .app-description {
+        height: 40px;
+    }
+    
+    .modal-app-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .modal-app-title {
+        font-size: 18px;
+    }
+    
+    .modal-screenshots img {
+        max-width: 120px;
+        max-height: 90px;
+    }
+    
+    .screenshot-modal-content {
+        width: 95%;
+        height: 85%;
+        top: 7.5%;
+        left: 2.5%;
+    }
+}
+
+/* Clear floats */
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}

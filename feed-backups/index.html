@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="img-src 'self' https://www.webosarchive.org http://appimages.webosarchive.com http://weboslives.eu http://museum.weboslives.eu https://museum.weboslives.eu;">
+    <title>Preware App Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Preware App Store</h1>
+            <div id="controls">
+                <div class="control-group">
+                    <label for="feed-select">Feed:</label>
+                    <select id="feed-select">
+                        <option value="wosa">WOSA</option>
+                        <option value="precentral">PreCentral</option>
+                        <option value="palm-catalog">Palm Catalog</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="search-input">Search:</label>
+                    <input type="text" id="search-input" placeholder="Search apps...">
+                </div>
+                <div class="control-group">
+                    <label for="section-filter">Category:</label>
+                    <select id="section-filter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="device-filter">Device:</label>
+                    <select id="device-filter">
+                        <option value="">All Devices</option>
+                        <option value="Pre">Pre</option>
+                        <option value="Pre2">Pre2</option>
+                        <option value="Pre3">Pre3</option>
+                        <option value="Pixi">Pixi</option>
+                        <option value="Veer">Veer</option>
+                        <option value="TouchPad">TouchPad</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select">
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="updated-desc">Last Updated (Newest)</option>
+                        <option value="updated-asc">Last Updated (Oldest)</option>
+                        <option value="maintainer-asc">Maintainer (A-Z)</option>
+                        <option value="maintainer-desc">Maintainer (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <div id="loading" class="loading">Loading apps...</div>
+        
+        <div id="app-grid" class="app-grid">
+            <!-- Apps will be dynamically loaded here -->
+        </div>
+
+        <div id="pagination" class="pagination">
+            <button id="prev-btn" disabled>Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-btn" disabled>Next</button>
+        </div>
+
+        <div id="app-detail-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modal-content">
+                    <!-- App details will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <div id="screenshot-modal" class="screenshot-modal">
+            <div class="screenshot-modal-content">
+                <span class="close">&times;</span>
+                <img id="screenshot-full" src="" alt="Screenshot">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
